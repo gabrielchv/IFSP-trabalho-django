@@ -1,0 +1,28 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+    <script>
+      var data = "{{loggedUser}}";
+    </script>
+  </head>
+  <body>
+    <a href="/loginwebsite/login">Login</a>
+    <a href="/loginwebsite/register">Register</a>
+    <a href="/loginwebsite/main">Main</a>
+    <br />
+
+    {% if loggedUser %}
+    <h1>Bem vindo {{loggedUser}}</h1>
+    {% else %}
+    <h1>Você não está logado ainda</h1>
+    {% endif %}
+    <script src="{% static 'script.js' %}"></script>
+  </body>
+</html>
