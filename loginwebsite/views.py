@@ -1,9 +1,22 @@
-from urllib import request
+from rest_framework.decorators import api_view
 from django.shortcuts import render, HttpResponse
 from .models import User
+import json
 from django.contrib.auth import authenticate, login
+from rest_framework import viewsets
+from .serializers import UserSerializer
 
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all().order_by('username')
+    serializer_class = UserSerializer
+    def get():
+        serializer_class = UserSerializer
+    def post(self, request):
+        print(request.data)  
 
+class UserRegister(viewsets.ModelViewSet):
+    def post(self, request):
+        print(request)    
 
 def register_user(req):
     if req.method == "POST":
@@ -16,6 +29,15 @@ def register_user(req):
         user.save()
     
     return render(req, 'register.html')
+    # username = req.POST.get('username')
+    # password = req.POST.get('password')
+    # if username and password:
+    #     user = User()
+    #     user.username = username
+    #     user.password = password
+    #     user.save()
+    #     return HttpResponse(json.dumps({"hey": "hey"}), content_type="application/json")
+    # print(username + " e " + password)
 
 def login_user(req):
     username = req.POST.get('username')
