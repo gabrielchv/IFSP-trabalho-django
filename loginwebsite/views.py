@@ -3,6 +3,8 @@ from django.shortcuts import render, HttpResponse
 from .models import User
 from django.contrib.auth import authenticate, login
 
+
+
 def register_user(req):
     if req.method == "POST":
         username = req.POST.get('username')
